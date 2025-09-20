@@ -1,22 +1,14 @@
-import {
-  cloneElement,
-  isValidElement,
-  type ReactElement,
-  type Ref,
-  type ComponentPropsWithRef,
-  type ElementType,
-} from 'react';
+import { cloneElement, isValidElement, type ReactElement, type Ref } from 'react';
 
-export function cloneWithRef<T extends ElementType>(
-  element: ReactElement<ComponentPropsWithRef<T>>,
+export function cloneWithRef<T>(
+  element: ReactElement,
   ref: Ref<T>,
-  extraProps: Partial<ComponentPropsWithRef<T>> = {},
-): ReactElement<ComponentPropsWithRef<T>> {
+  extraProps: Record<string, unknown> = {},
+): ReactElement {
   if (!isValidElement(element)) {
     throw new Error('Invalid React Element');
   }
-
-  return cloneElement(element, {
+  return cloneElement(element as ReactElement<any>, {
     ...extraProps,
     ref,
   });

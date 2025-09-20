@@ -1,15 +1,19 @@
 import { cn } from '@/shared/utils/cn';
-import { ReactElement, ReactNode } from 'react';
+import { ReactNode, forwardRef } from 'react';
 
 export type InputGroupProps = {
   children: ReactNode;
   className?: string;
 } & React.ComponentPropsWithoutRef<'div'>;
 
-export function InputGroup({ children, className, ...props }: InputGroupProps): ReactElement {
-  return (
-    <div className={cn('flex flex-col gap-1.5', className)} {...props}>
-      {children}
-    </div>
-  );
-}
+export const InputGroup = forwardRef<HTMLDivElement, InputGroupProps>(
+  ({ children, className, ...props }, ref) => {
+    return (
+      <div ref={ref} className={cn('flex flex-col gap-1', className)} {...props}>
+        {children}
+      </div>
+    );
+  },
+);
+
+InputGroup.displayName = 'InputGroup';

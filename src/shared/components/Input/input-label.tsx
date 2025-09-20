@@ -1,29 +1,29 @@
-import { ReactNode } from 'react';
-import { Icon } from '../Icon';
+import { ReactNode, forwardRef } from 'react';
 import { cn } from '@/shared/utils/cn';
-import { inputLabelConfig } from './variants/input-label.cva';
+import { inputLabelConfig } from './configs/input-label.config';
+import { Icon } from '../Icon';
+import type { VariantProps } from 'class-variance-authority';
 
-export type InputLabelProps = {
+export type InputLabelProps = VariantProps<typeof inputLabelConfig> & {
   required?: boolean;
   left?: ReactNode;
-  size?: 'sm' | 'md' | 'lg';
-  color?: 'primary' | 'gray' | 'red' | 'black';
+  error?: boolean;
 } & React.ComponentPropsWithoutRef<'label'>;
 
-export function InputLabel({
-  required,
-  left,
-  size,
-  color,
-  className,
-  children,
-  ...props
-}: InputLabelProps) {
-  return (
-    <label className={cn(inputLabelConfig({ size, color }), className)} {...props}>
-      {left}
-      {children}
-      {required && <Icon name='required_fill' className='text-red-600' />}
-    </label>
-  );
-}
+export const InputLabel = forwardRef<HTMLLabelElement, InputLabelProps>(
+  ({ required, left, children, color = 'gray', size, error, className, ...props }, ref) => {
+    return (
+      <label
+        ref={ref}
+        className={cn(inputLabelConfig({ size, color: error ? 'red' : color }), className)}
+        {...props}
+      >
+        {left && <span>{left}</span>}
+        <span>{children}</span>
+        {required && <Icon name='required_fill' className='text-red-600' />}
+      </label>
+    );
+  },
+);
+
+InputLabel.displayName = 'InputLabel';

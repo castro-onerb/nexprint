@@ -1,31 +1,49 @@
 import { cn } from '@/shared/utils/cn';
-import { ReactElement, ReactNode } from 'react';
-import { inputConfig, inputFieldConfig } from './variants/input-root.cva';
+import { ReactNode, forwardRef } from 'react';
+import { inputConfig, inputFieldConfig } from './configs/input-root.config';
+import type { VariantProps } from 'class-variance-authority';
+import { Loading } from '@/shared/components/Loading';
 
-export type InputRootProps = {
-  left?: ReactNode;
-  right?: ReactNode;
-  variant?: 'contained' | 'outlined';
-  corner?: 'square' | 'soft' | 'rounded' | 'pill';
-  color?: 'primary' | 'black' | 'gray' | 'blue' | 'emerald' | 'amber' | 'red';
-  size?: 'sm' | 'md' | 'lg';
-} & Omit<React.ComponentPropsWithoutRef<'input'>, 'size'>;
+export type InputRootProps = VariantProps<typeof inputConfig> &
+  VariantProps<typeof inputFieldConfig> & {
+    left?: ReactNode;
+    right?: ReactNode;
+    color?: 'primary' | 'black' | 'gray' | 'blue' | 'emerald' | 'amber' | 'red';
+    isLoading?: boolean;
+    renderLoading?: ReactNode;
+  } & Omit<React.ComponentPropsWithoutRef<'input'>, 'size'>;
 
-export function InputRoot({
-  left,
-  right,
-  variant = 'outlined',
-  corner = 'soft',
-  color = 'gray',
-  size = 'md',
-  className,
-  ...props
-}: InputRootProps): ReactElement {
-  return (
-    <div className={cn(inputConfig({ variant, corner, color }), className)}>
-      {left && <span className='ml-2'>{left}</span>}
-      <input className={inputFieldConfig({ size })} {...props} />
-      {right && <span className='mr-2'>{right}</span>}
-    </div>
-  );
-}
+export const InputRoot = forwardRef<HTMLInputElement, InputRootProps>(
+  (
+    {
+      left,
+      right,
+      color,
+      variant,
+      corner,
+      size = 'md',
+      isLoading,
+      renderLoading,
+      className,
+      ...inputProps
+    },
+    ref,
+  ) => {
+    const loadingNode = renderLoading ?? <Loading.Spin color='gray' size='sm' className='ml-2' />;
+
+    return (
+      <div className={cn(inputConfig({ color, variant, corner }), className)}>
+        {left && <span className='ml-2'>{left}</span>}
+        {isLoading && loadingNode}
+        <input
+          ref={ref}
+          className={cn(inputFieldConfig({ size, textColor: color }))}
+          {...inputProps}
+        />
+        {right && <span className='mr-2'>{right}</span>}
+      </div>
+    );
+  },
+);
+
+InputRoot.displayName = 'InputRoot';

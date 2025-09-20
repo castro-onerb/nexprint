@@ -2,12 +2,15 @@ import { useEffect, useState } from 'react';
 import { debounce } from '../utils/use-debounce';
 
 export function useViewport() {
-  const [width, setWidth] = useState(() => window.innerWidth);
+  const [width, setWidth] = useState<number | null>(null);
 
   useEffect(() => {
+    setWidth(window.innerWidth);
+
     const handleResize = debounce(() => {
       setWidth(window.innerWidth);
-    });
+    }, 100);
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -16,28 +19,32 @@ export function useViewport() {
   const tabletMax = 769;
   const notebookMax = 1280;
 
-  const mobile = width < mobileMax;
-  const tablet = width < tabletMax;
-  const notebook = width < notebookMax;
-  const desktop = width >= notebookMax;
+  const mobile = width !== null ? width < mobileMax : false;
+  const tablet = width !== null ? width < tabletMax : false;
+  const notebook = width !== null ? width < notebookMax : false;
+  const desktop = width !== null ? width >= notebookMax : false;
 
-  const tabletOnly = width >= mobileMax && width < tabletMax;
-  const notebookOnly = width >= tabletMax && width < notebookMax;
+  const tabletOnly = width !== null ? width >= mobileMax && width < tabletMax : false;
+  const notebookOnly = width !== null ? width >= tabletMax && width < notebookMax : false;
 
-  const customOnly = (min: number, max: number) => width >= min && width < max;
-  const min = (min: number) => width >= min;
-  const max = (max: number) => width <= max;
+  const customOnly = (min: number, max: number) =>
+    width !== null ? width >= min && width < max : false;
+  const min = (min: number) => (width !== null ? width >= min : false);
+  const max = (max: number) => (width !== null ? width <= max : false);
 
   return {
     width,
+    // Faixas diretas
     mobile,
     tablet,
     notebook,
     desktop,
 
+    // Faixas exclusivas
     tabletOnly,
     notebookOnly,
 
+    // Utilitário customizado
     customOnly,
     min,
     max,
