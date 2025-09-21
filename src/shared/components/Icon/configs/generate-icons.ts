@@ -9,7 +9,9 @@ const __dirname = path.dirname(__filename);
 const iconsDir = path.resolve(__dirname, '../svg');
 const outputDir = path.resolve(__dirname, '../json');
 
+// Garante que a pasta existe, mas limpa antes
 fs.ensureDirSync(outputDir);
+fs.emptyDirSync(outputDir);
 
 const files = fs.readdirSync(iconsDir).filter((f) => f.endsWith('.svg'));
 
@@ -22,8 +24,8 @@ files.forEach((file) => {
   const parsed = parseSVGContent(svgContent);
 
   if (!parsed) {
-    console.warn(`Erro ao parsear SVG: ${file}`);
-    return; // pula este arquivo
+    console.warn(`⚠️ Erro ao parsear SVG: ${file}`);
+    return;
   }
 
   // Passo 2: Converter para Iconify JSON
@@ -32,5 +34,7 @@ files.forEach((file) => {
   // Salvar JSON
   const jsonFile = path.join(outputDir, `${name}.json`);
   fs.writeFileSync(jsonFile, JSON.stringify(iconJSON, null, 2));
-  console.log(`Gerado: ${jsonFile}`);
+  console.log(`✅ Gerado: ${jsonFile}`);
 });
+
+console.log('✨ Todos os ícones foram processados!');

@@ -24,8 +24,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='pt-BR'>
-      <body className={`${interTight.variable} ${ibmMono.variable} antialiased`}>{children}</body>
+    <html lang='pt-BR' data-color-scheme='light'>
+      <body className={`${interTight.className} ${ibmMono.variable} bg-background antialiased`}>
+        {children}
+      </body>
     </html>
   );
 }

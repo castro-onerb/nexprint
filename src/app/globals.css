@@ -1,9 +1,52 @@
 @import "tailwindcss";
 
-:root {
-  /* --background: #ffffff;
-  --foreground: #171717; */
+:root, :root[data-color-scheme="light"] {
+  --background: #ffffff;
+  --foreground: #171717;
+
+  --border: #F0F1F2;
+
+  font-family: var(--font-inter-tight), sans-serif;
 }
+
+:root, :root[data-color-scheme="dark"] {
+  --background: #141A21;
+  --foreground: #ededed;
+
+  --border: #1C252E;
+}
+
+.mono {
+  font-family: var(--font-ibm-mono), monospace;
+}
+
+@theme inline {
+  --color-primary-50: #f0f9ff;
+  --color-primary-100: #e0f2fe;
+  --color-primary-200: #bae6fd;
+  --color-primary-300: #7dd3fc;
+  --color-primary-400: #38bdf8;
+  --color-primary-500: #0ea5e9;
+  --color-primary-600: #0284c7;
+  --color-primary-700: #0369a1;
+  --color-primary-800: #075985;
+  --color-primary-900: #0c4a6e;
+
+  --color-secondary-50: #f5f3ff;
+  --color-secondary-100: #ede9fe;
+  --color-secondary-200: #ddd6fe;
+  --color-secondary-300: #c4b5fd;
+  --color-secondary-400: #a78bfa;
+  --color-secondary-500: #8b5cf6;
+  --color-secondary-600: #7c3aed;
+  --color-secondary-700: #6d28d9;
+  --color-secondary-800: #5b21b6;
+  --color-secondary-900: #4c1d95;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
 @theme inline {
   @keyframes shine {
     0% { left: -50%; }
@@ -31,17 +74,4 @@
   --animate-bounce-dot3: bounceDot 1.2s infinite ease-in-out 0.6s;
 
   --animate-shine: shine 1.5s linear infinite;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* --background: #0a0a0a;
-    --foreground: #ededed; */
-  }
-}
-
-body {
-  /* background: var(--background);
-  color: var(--foreground); */
-  font-family: Arial, Helvetica, sans-serif;
 }

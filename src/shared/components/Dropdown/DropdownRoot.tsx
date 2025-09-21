@@ -18,15 +18,14 @@ export interface IDropdownContext {
   setOpen: (value: boolean) => void;
 }
 
-export interface DropdownRootProps {
-  children?: (props: { ref: Ref<HTMLElement>; onClick: () => void }) => ReactNode;
+export interface DropdownRootProps<T extends HTMLElement = HTMLElement> {
+  children?: (props: { ref: Ref<T>; onClick: () => void; open: boolean }) => ReactNode;
   dropdown: ReactNode;
   placement?: Placement; // se houver trigger
   controlledOpen?: boolean;
   onToggle?: () => void;
   closeOnClickOutside?: boolean;
 
-  /** Quando não houver trigger, use diretamente posicionamento absoluto */
   top?: number;
   bottom?: number;
   left?: number;
@@ -34,7 +33,7 @@ export interface DropdownRootProps {
   motionOrigin?: 'top' | 'bottom' | 'left' | 'right' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
 }
 
-export function DropdownRoot({
+export function DropdownRoot<T extends HTMLElement = HTMLElement>({
   children,
   dropdown,
   placement = 'bottom-start',
@@ -46,8 +45,8 @@ export function DropdownRoot({
   left,
   right,
   motionOrigin
-}: DropdownRootProps) {
-  const referenceRef = useRef<HTMLElement | null>(null);
+}: DropdownRootProps<T>) {
+  const referenceRef = useRef<T | null>(null);
   const floatingRef = useRef<HTMLDivElement | null>(null);
 
   const [internalOpen, setInternalOpen] = useState(false);
@@ -118,7 +117,7 @@ export function DropdownRoot({
     return () => document.removeEventListener('mousedown', onClickOutside);
   }, [open, closeOnClickOutside]);
 
-  const setRef: React.Ref<HTMLElement> = (el) => {
+  const setRef: React.Ref<T> = (el) => {
     referenceRef.current = el;
   };
 
@@ -138,7 +137,7 @@ export function DropdownRoot({
 
   return (
     <>
-      {children ? children({ ref: setRef, onClick: () => setOpen(prev => !prev) }) : null}
+      {children ? children({ ref: setRef, onClick: () => setOpen(prev => !prev), open }) : null}
       <AnimatePresence>
         {open && (
           <motion.div
