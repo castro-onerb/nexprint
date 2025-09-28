@@ -34,3 +34,82 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+src/
+  |--> app/
+    |--> (public)/register/page.tsx
+    |--> api/business/create (creio que deva criar outra mais nominalmente correta, para descrer que é o primeiro registro lá da pessoa, essa aqui fica pra posteridade)
+    |--> [globals.css, layout.tsx, middleware.ts, page.tsx]
+  |--> core/
+    |--> entities/ [entiti.ts]
+    |--> errors/ [app-error.ts, either.ts, validation-error.ts]
+    |--> permissions/ [permissions.ts, permissions-resolver.ts]
+    |--> types/ [address.ts]
+    |--> value-objects/ [address.ts, password.ts, unique-id.ts]
+  |--> domain/
+    |--> business/
+      |--> repositories/ [business.repository.ts]
+      |--> types/ [business.ts]
+      |--> business.entity.ts
+    |--> membership/
+      |--> repositories/ [membership.repository.ts]
+      |--> types/ [membership.ts]
+      |--> membership.entity.ts
+    |--> person/
+      |--> repositories/ [person.repository.ts]
+      |--> types/ [person.ts]
+      |--> person.entity.ts
+    |--> role/
+      |--> repositories/ [role.repository.ts]
+      |--> types/ [role.ts]
+      |--> role.entity.ts
+    |--> user/
+      |--> repositories/ [user.repository.ts]
+      |--> types/ [user.ts]
+      |--> user.entity.ts
+  |--> infra/
+    |--> cryptography/ [bcrypt-password.ts]
+    |--> database/
+      |--> in-memory/
+        |--> in-memory-business.repository.ts
+        |--> in-memory-membership.repository.ts
+        |--> in-memory-person.repository.ts
+        |--> in-memory-role.repository.ts
+        |--> in-memory-user.repository.ts
+      |--> prisma/ (not implemented)
+  |--> services/
+    |--> business/
+      |--> create-business/
+        |--> index.ts
+        |--> dto.ts
+      |--> factories/
+        |--> make-create-business.factory.ts
+    |--> membership/
+      |--> create-membership/
+        |--> index.ts
+        |--> dto.ts
+      |--> factories/
+        |--> make-create-membership.factory.ts
+    |--> person/
+      |--> create-person/
+        |--> index.ts
+        |--> dto.ts
+      |--> factories/
+        |--> make-create-person.factory.ts
+    |--> role/
+      |--> create-role/
+        |--> index.ts
+        |--> dto.ts
+      |--> factories/
+        |--> make-create-role.factory.ts
+    |--> user/
+      |--> create-user/
+        |--> index.ts
+        |--> dto.ts
+      |--> factories/
+        |--> make-create-user.factory.ts
+  |--> shared/
+    |--> components/ [Button/, Dropdown/, Effect/, Icon/, Input/, Layout/, Loading/, Navbar/]
+    |--> configs/ [dayjs.config.ts]
+    |--> hooks/ [use-viewport.ts]
+    |--> utils/ [clone-with-ref.ts, cn.ts, guard.ts, guard.ts, use-debounce.ts]

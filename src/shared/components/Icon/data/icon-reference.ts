@@ -2,6 +2,7 @@ import type { IconifyIcon } from '@iconify/react/dist/iconify.js';
 
 import IcDashboard from '@/shared/components/Icon/json/ic-dashboard.json';
 import IcAnalytics from '@/shared/components/Icon/json/ic-analytics.json';
+import NexPrint from '@/shared/components/Icon/json/nexprint.json';
 
 type IconData = { type: 'data'; value: IconifyIcon };
 type IconString = { type: 'string'; value: string };
@@ -12,6 +13,7 @@ export const IconsReference = {
   chevron_right_fill: { type: 'string', value: 'mingcute:right-fill' },
   chevron_down_fill: { type: 'string', value: 'mingcute:down-fill' },
   chevron_left_fill: { type: 'string', value: 'mingcute:left-fill' },
+  nexprint_full_fill: { type: 'data', value: NexPrint },
   speed_duotone_fill: { type: 'string', value: 'lets-icons:speed-fill-duotone' },
   speed_custom_duotone_fill: { type: 'data', value: IcDashboard },
   required_fill: { type: 'string', value: 'ix:mandatory' },

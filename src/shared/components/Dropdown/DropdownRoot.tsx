@@ -21,7 +21,7 @@ export interface IDropdownContext {
 export interface DropdownRootProps<T extends HTMLElement = HTMLElement> {
   children?: (props: { ref: Ref<T>; onClick: () => void; open: boolean }) => ReactNode;
   dropdown: ReactNode;
-  placement?: Placement; // se houver trigger
+  placement?: Placement;
   controlledOpen?: boolean;
   onToggle?: () => void;
   closeOnClickOutside?: boolean;

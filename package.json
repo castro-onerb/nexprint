@@ -13,6 +13,7 @@
   "dependencies": {
     "@floating-ui/react": "^0.27.16",
     "@iconify/react": "^6.0.1",
+    "bcryptjs": "^3.0.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.18",
@@ -26,6 +27,7 @@
     "@eslint/eslintrc": "^3",
     "@iconify/utils": "^3.0.1",
     "@tailwindcss/postcss": "^4",
+    "@types/css-modules": "^1.0.5",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^20",
     "@types/react": "^19.1.13",

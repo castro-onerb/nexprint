@@ -14,13 +14,13 @@ const inputColorMap: Record<Variant, Record<Color, string>> = {
     red: 'border-red-600 bg-red-600',
   },
   outlined: {
-    gray: 'border-gray-500',
+    gray: 'border-gray-300',
     black: 'border-black',
-    primary: 'border-blue-600',
-    blue: 'border-sky-600',
-    emerald: 'border-emerald-600',
-    amber: 'border-amber-500',
-    red: 'border-red-600',
+    primary: 'border-blue-300',
+    blue: 'border-sky-300',
+    emerald: 'border-emerald-300',
+    amber: 'border-amber-300',
+    red: 'border-red-300',
   },
 };
 
@@ -73,7 +73,7 @@ export const inputFieldConfig = cva('outline-none w-full leading-none bg-transpa
     size: {
       sm: 'p-1.5 text-sm font-normal h-[30px]',
       md: 'p-2 text-base font-normal h-[37px]',
-      lg: 'p-3 text-base font-medium h-[46px]',
+      lg: 'p-3 text-base font-medium h-[50px]',
     },
     textColor: {
       primary: 'text-primary-500',

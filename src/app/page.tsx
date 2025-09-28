@@ -1,8 +1,12 @@
 'use client';
 
+import { Button } from '@/shared/components/Button';
 import { Dropdown } from '@/shared/components/Dropdown';
+import { Effect } from '@/shared/components/Effect';
 import { Icon } from '@/shared/components/Icon';
+import { Input } from '@/shared/components/Input';
 import { Layout } from '@/shared/components/Layout';
+import { Loading } from '@/shared/components/Loading';
 import { Navbar } from '@/shared/components/Navbar';
 import { useViewport } from '@/shared/hooks/use-viewport';
 import clsx from 'clsx';
@@ -14,18 +18,29 @@ export default function Home() {
       classname={clsx(mobile && 'bg-gradient-to-b from-blue-500 from-35% to-background to-35%')}
       sidebar={<Navbar.Root />}
     >
-      <Dropdown.Root<HTMLDivElement>
-        motionOrigin='bottom'
+      <Dropdown.Root
+        controlledOpen={true}
+        closeOnClickOutside={true}
+        bottom={20}
+        right={20}
+        motionOrigin='bottom-right'
         dropdown={
-          <div className='bg-red-500 p-10 rounded-xl shadow-xl border border-slate-200'>Modal</div>
+          <div className='bg-white shadow-lg rounded-lg p-4 w-64'>
+            <p className='text-gray-700 font-medium'>Menu rápido</p>
+            <ul className='mt-2 flex flex-col gap-2'>
+              <li className='cursor-pointer hover:bg-gray-100 px-2 py-1 rounded'>Novo arquivo</li>
+              <li className='cursor-pointer hover:bg-gray-100 px-2 py-1 rounded'>Upload</li>
+              <li className='cursor-pointer hover:bg-gray-100 px-2 py-1 rounded'>Configurações</li>
+            </ul>
+          </div>
         }
-      ></Dropdown.Root>
+      />
       <div className='flex p-4'>
         <Dropdown.Root<HTMLDivElement>
           placement='bottom-start'
           motionOrigin='top-left'
           dropdown={
-            <div className='flex flex-col gap-1  shadow-lg rounded-lg border-2 border-white p-1 min-w-[230px]'>
+            <div className='flex flex-col gap-1  shadow-lg rounded-lg border-2 border-white bg-white p-1 min-w-[230px]'>
               <div className='flex flex-col max-h-[200px] overflow-y-auto'>
                 <div className='flex items-center gap-2 cursor-pointer transition px-2 py-3 rounded-lg bg-white/50'>
                   <div className='w-[26px] h-[26px] bg-primary-500 rounded-full flex items-center leading-none justify-center text-xs font-semibold text-primary-50'>
@@ -102,6 +117,53 @@ export default function Home() {
             </div>
           )}
         </Dropdown.Root>
+      </div>
+
+      <div className='p-4 grid grid-cols-4 gap-4'>
+        <Button.Root size='lg' effect={<Effect.Shine />}>
+          Entrando...
+        </Button.Root>
+        <Button.Root
+          size='lg'
+          isLoading
+          renderLoading={<Loading.Bounce />}
+          effect={<Effect.Shine />}
+        >
+          Entrando
+        </Button.Root>
+        <Button.Root size='lg' isLoading renderLoading={<Loading.Spin />} effect={<Effect.Shine />}>
+          Entrando
+        </Button.Root>
+        <Button.Root
+          size='lg'
+          isLoading
+          renderLoading={<Loading.Typing />}
+          effect={<Effect.Shine />}
+        >
+          Entrando
+        </Button.Root>
+      </div>
+
+      <div className='p-4 grid grid-cols-4 gap-4'>
+        <Input.Group>
+          <Input.Label required>Nome</Input.Label>
+          <Input.Root
+            isLoading
+            size='lg'
+            color='gray'
+            placeholder='Insira seu nome de usuário aqui'
+          />
+        </Input.Group>
+        <Input.Group>
+          <Input.Label required>Nome</Input.Label>
+          <Input.Root size='lg' color='red' placeholder='Insira seu nome de usuário aqui' />
+          <Input.Legend color='red'>
+            Não localizamos seu nome de usuário, deseja{' '}
+            <a href='#' className='font-semibold'>
+              criar uma conta?
+            </a>
+          </Input.Legend>
+        </Input.Group>
       </div>
     </Layout.Root>
   );

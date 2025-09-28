@@ -4,16 +4,12 @@
   --background: #ffffff;
   --foreground: #171717;
 
-  --border: #F0F1F2;
-
   font-family: var(--font-inter-tight), sans-serif;
 }
 
 :root, :root[data-color-scheme="dark"] {
   --background: #141A21;
   --foreground: #ededed;
-
-  --border: #1C252E;
 }
 
 .mono {
