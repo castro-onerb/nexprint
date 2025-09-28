@@ -24,4 +24,8 @@ export class InMemoryBusinessRepository implements BusinessRepository {
     }
     return Promise.resolve(business);
   }
+
+  findAll(): Promise<Business[]> {
+    return Promise.resolve(this.items);
+  }
 }

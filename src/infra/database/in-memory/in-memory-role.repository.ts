@@ -1,22 +1,22 @@
-import { RoleRepository } from '@/domain/company/role/repositories/role.repository';
+import { RolesRepository } from '@/domain/company/role/repositories/role.repository';
 import { Role } from '@/domain/company/role/role.entity';
 
-export class InMemoryRoleRepository implements RoleRepository {
-  private roles: Role[] = [];
+export class InMemoryRoleRepository implements RolesRepository {
+  private items: Role[] = [];
 
   async save(role: Role): Promise<void> {
-    this.roles.push(role);
+    this.items.push(role);
   }
 
   async findById(id: string): Promise<Role | null> {
-    return this.roles.find((r) => r.id.toString() === id) || null;
-  }
-
-  async findAll(): Promise<Role[]> {
-    return this.roles;
+    return this.items.find((r) => r.id.toString() === id) || null;
   }
 
   async findByBusinessId(businessId: string): Promise<Role[]> {
-    return this.roles.filter((r) => r.businessId.toString() === businessId);
+    return this.items.filter((r) => r.businessId.toString() === businessId);
+  }
+
+  async findAll(): Promise<Role[]> {
+    return this.items;
   }
 }

@@ -5,4 +5,5 @@ export abstract class MembershipRepository {
   abstract findById(id: string): Promise<Membership | null>;
   abstract findByUserId(userId: string): Promise<Membership[]>;
   abstract findByBusinessId(businessId: string): Promise<Membership[]>;
+  abstract findAll(): Promise<Membership[]>;
 }

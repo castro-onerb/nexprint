@@ -1,22 +1,26 @@
-import { Membership } from '@/domain/identity/membership/membership.entity';
-import { MembershipRepository } from '@/domain/identity/membership/repositories/membership.repository';
+import { Membership } from '@/domain/company/membership/membership.entity';
+import { MembershipRepository } from '@/domain/company/membership/repositories/membership.repository';
 
 export class InMemoryMembershipRepository implements MembershipRepository {
-  private memberships: Membership[] = [];
+  private items: Membership[] = [];
 
   async save(membership: Membership): Promise<void> {
-    this.memberships.push(membership);
+    this.items.push(membership);
   }
 
   async findById(id: string): Promise<Membership | null> {
-    return this.memberships.find((m) => m.id.toString() === id) || null;
+    return this.items.find((m) => m.id.toString() === id) || null;
   }
 
   async findByUserId(userId: string): Promise<Membership[]> {
-    return this.memberships.filter((m) => m.userId.toString() === userId);
+    return this.items.filter((m) => m.userId.toString() === userId);
   }
 
   async findByBusinessId(businessId: string): Promise<Membership[]> {
-    return this.memberships.filter((m) => m.businessId.toString() === businessId);
+    return this.items.filter((m) => m.businessId.toString() === businessId);
+  }
+
+  findAll(): Promise<Membership[]> {
+    return Promise.resolve(this.items);
   }
 }
