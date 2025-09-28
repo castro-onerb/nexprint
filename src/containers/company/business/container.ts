@@ -4,5 +4,6 @@ import { CreateBusinessService } from '@/services/company/business/create-busine
 const businessRepo = new InMemoryBusinessRepository();
 
 export const businessContainer = {
+  businessRepo,
   createBusinessService: new CreateBusinessService(businessRepo),
 };

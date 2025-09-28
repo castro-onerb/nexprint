@@ -12,6 +12,7 @@ export async function register(
     surname: dto.personSurname,
     phone: dto.phone,
   });
+
   if (personRes.isLeft()) {
     return left(personRes.value);
   }
