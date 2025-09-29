@@ -37,7 +37,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ errors: result.value.details }, { status: 400 });
     }
 
-    return NextResponse.json({ membershipId: result.value.membershipId }, { status: 201 });
+    return NextResponse.json(
+      { data: { membershipId: result.value.membershipId } },
+      { status: 201 },
+    );
   } catch (err) {
     console.error(err);
     return NextResponse.json({ error: 'Erro interno' }, { status: 500 });

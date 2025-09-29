@@ -1,16 +1,17 @@
 import type { Metadata } from 'next';
-import { IBM_Plex_Mono, Inter_Tight } from 'next/font/google';
+import { IBM_Plex_Mono, Barlow } from 'next/font/google';
 import './globals.css';
+import { ThemeProvider } from '@/shared/theme/theme-provider';
 
 const ibmMono = IBM_Plex_Mono({
   subsets: ['latin'],
   weight: ['100', '200', '300', '400', '500', '600', '700'],
   variable: '--font-ibm-mono',
 });
-const interTight = Inter_Tight({
+const barlow = Barlow({
   subsets: ['latin'],
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'] as const,
-  variable: '--font-inter-tight',
+  variable: '--font-barlow',
 });
 
 export const metadata: Metadata = {
@@ -24,9 +25,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='pt-BR' data-color-scheme='light'>
-      <body className={`${interTight.className} ${ibmMono.variable} bg-background antialiased`}>
-        {children}
+    <html lang='pt-BR'>
+      <body className={`${barlow.className} ${ibmMono.variable} antialiased`}>
+        <ThemeProvider name='light'>{children}</ThemeProvider>
       </body>
     </html>
   );

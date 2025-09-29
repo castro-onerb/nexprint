@@ -34,7 +34,6 @@ export class PermissionResolver {
 
   static listPermissions(user: UserContext, businessId?: string): PermissionId[] {
     if (user.isOwner) {
-      // retorna todas do sistema (inclusive owner-only)
       return [...new Set(user.memberships.flatMap((m) => m.permissions)), 'system:full_access'];
     }
 
